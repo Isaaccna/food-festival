@@ -36,8 +36,8 @@ module.exports = {
                 }  
               },
               {
-                loader: 'image-webpack-loader'
-              }
+          loader: 'image-webpack-loader'
+        }
             ]
           }
         ]
@@ -49,7 +49,7 @@ module.exports = {
           jQuery: "jquery"
         }),
         new BundleAnalyzerPlugin({
-            analyzerMode: "static", // the report outputs to an HTML file in the dist folder
+            analyzerMode: "disable", // the report outputs to an HTML file in the dist folder
           })
       ],
       
