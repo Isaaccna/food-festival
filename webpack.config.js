@@ -1,5 +1,6 @@
 const path = require("path");
 const webpack = require("webpack");
+const WebpackPwaManifest = require("webpack-pwa-manifest");
 
 /*This is a plug that will analyze our bundle sizes to see 
  how much JS is being processed by the brownser*/
@@ -8,14 +9,14 @@ const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPl
 
 module.exports = {
     entry: {
-        app: "./assets/js/script.js",
-        events: "./assets/js/events.js",
-        schedule: "./assets/js/schedule.js",
-        tickets: "./assets/js/tickets.js"
+        app: "./public/assets/js/script.js",
+        events: "./public/assets/js/events.js",
+        schedule: "./public/assets/js/schedule.js",
+        tickets: "./public/assets/js/tickets.js"
       },      
       output: {
         filename: "[name].bundle.js",
-        path: __dirname + "/dist",
+        path: __dirname + "./public/dist",
       },
 
       module: {
@@ -50,6 +51,21 @@ module.exports = {
         }),
         new BundleAnalyzerPlugin({
             analyzerMode: "disable", // the report outputs to an HTML file in the dist folder
+          }),
+          new WebpackPwaManifest({
+            name: "Food Event",
+            short_name: "Foodies",
+            description: "An app that allows you to view upcoming food events.",
+            start_url: "..index.html",
+            background_color: "#01579b",
+            theme_color: "#ffffff",
+            fingerprints: false,
+            inject: false,
+            icons: [{
+              src: path.resolve("public/assets/img/icons/icon-512x512.png"),
+              sizes: [96, 128, 192, 256, 384, 512],
+              destination: path.join("assets", "icons")
+            }]
           })
       ],
       
